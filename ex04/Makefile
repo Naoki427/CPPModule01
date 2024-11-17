@@ -2,7 +2,7 @@ NAME = SED_IS_FOR_LUSERS
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra
 CXXFLAGS += -std=c++98
-CXXFLAGS += -fsanitize=address
+# CXXFLAGS += -fsanitize=address
 
 SRC = 	main.cpp
 
