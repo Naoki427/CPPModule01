@@ -14,16 +14,16 @@ int find_string(std::string line,std::string s1)
     }
     if(s1[i] == '\0')
         return i-1;
-    return 0;
+    return -1;
 }
 int replace_string(std::string filename,std::string s1,std::string s2)
 {
-    std::ifstream old_file(filename);
+    std::ifstream old_file(filename.c_str());
     if (!old_file) {
         std::cerr << "Error: unable to open input file: " << filename << std::endl;
         return 1;
     }
-    std::ofstream new_file(filename + ".replace");
+    std::ofstream new_file((filename + ".replace").c_str());
     if (!new_file) {
         std::cerr << "Error: unable to open input file: " << filename + ".replace" << std::endl;
         return 1;
@@ -33,7 +33,7 @@ int replace_string(std::string filename,std::string s1,std::string s2)
         for(int i=0;line[i];i++)
         {
             int result = find_string(&line[i],s1);
-            if(!result)
+            if(result == -1)
             {
                 new_file << line[i];
             }
@@ -43,10 +43,7 @@ int replace_string(std::string filename,std::string s1,std::string s2)
                 i += result;
             }
         }
-        if(old_file.peek() != EOF)
-        {
-            new_file << "\n";
-        }
+        new_file << "\n";
     }
     new_file.close();
 	old_file.close();
